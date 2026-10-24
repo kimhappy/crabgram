@@ -1,0 +1,28 @@
+error[E0080]: evaluation panicked: Cargo.toml needs `authors = ["Name <email>"]`: the first author is the maintainer
+  --> tests/ui/info_without_maintainer.rs:6:20
+   |
+ 6 |   const INFO: Info = checked(Fields {
+   |  ____________________^
+ 7 | |     uri: c"urn:example:tremolo",
+ 8 | |     name: "Tremolo",
+ 9 | |     description: "",
+...  |
+19 | |     version: "0.1.0",
+20 | | });
+   | |__^ evaluation of `INFO` failed inside this call
+   |
+note: inside `crabgram::__private::info::checked`
+  --> src/info/make.rs
+   |
+   |         Some(problem) => problem.fail(),
+   |                          ^^^^^^^^^^^^^^
+note: inside `InfoProblem::fail`
+  --> $RUST/core/src/panic.rs
+   |
+   |         $crate::panicking::panic_display(&$arg);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the failure occurred here
+   |
+  ::: src/info/problem.rs
+   |
+   |         panic!("{}", self.message());
+   |         ---------------------------- in this macro invocation

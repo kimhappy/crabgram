@@ -1,0 +1,5 @@
+error: a control field is `f32`, `bool`, an integer up to 32 bits or an enum deriving `Choice`
+ --> tests/ui/controls_unsupported_type.rs:3:12
+  |
+3 |     level: &'static f32,
+  |            ^^^^^^^^^^^^

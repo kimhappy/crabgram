@@ -1,0 +1,5 @@
+error: the quick pot takes an input, not an output
+ --> tests/ui/controls_quick_pot_on_output.rs:3:23
+  |
+3 |     #[control(output, quick_pot)]
+  |                       ^^^^^^^^^

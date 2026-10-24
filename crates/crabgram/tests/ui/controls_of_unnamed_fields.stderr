@@ -1,0 +1,5 @@
+error: Controls needs named fields: each names a port
+ --> tests/ui/controls_of_unnamed_fields.rs:2:8
+  |
+2 | struct Params(f32);
+  |        ^^^^^^

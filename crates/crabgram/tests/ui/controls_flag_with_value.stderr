@@ -1,0 +1,5 @@
+error: `output` is a flag and takes no value
+ --> tests/ui/controls_flag_with_value.rs:3:15
+  |
+3 |     #[control(output = true)]
+  |               ^^^^^^

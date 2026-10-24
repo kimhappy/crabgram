@@ -1,0 +1,7 @@
+error[E0308]: mismatched types
+  --> tests/ui/controls_default_of_another_choice.rs:15:25
+   |
+15 |     #[control(default = Mode::Slow)]
+   |                         ^^^^^^^^^^ expected `Shape`, found `Mode`
+16 |     shape: Shape,
+   |            ----- expected due to this

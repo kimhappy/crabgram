@@ -1,0 +1,5 @@
+error: Controls derives only for types without generic parameters
+ --> tests/ui/controls_generic.rs:2:14
+  |
+2 | struct Params<T> {
+  |              ^^^

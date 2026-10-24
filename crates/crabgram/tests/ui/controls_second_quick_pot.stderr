@@ -1,0 +1,5 @@
+error: only one control can be the quick pot
+ --> tests/ui/controls_second_quick_pot.rs:5:15
+  |
+5 |     #[control(quick_pot)]
+  |               ^^^^^^^^^

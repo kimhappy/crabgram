@@ -1,0 +1,5 @@
+error: a Choice variant holds no fields
+ --> tests/ui/choice_variant_with_fields.rs:3:5
+  |
+3 |     Sine(f32),
+  |     ^^^^^^^^^

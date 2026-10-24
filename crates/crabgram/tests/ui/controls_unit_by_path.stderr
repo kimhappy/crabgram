@@ -1,0 +1,5 @@
+error: `unit` names a variant of `Unit` alone, as `unit = Hertz`
+ --> tests/ui/controls_unit_by_path.rs:3:22
+  |
+3 |     #[control(unit = crabgram::Unit::Hertz)]
+  |                      ^^^^^^^^^^^^^^^^^^^^^

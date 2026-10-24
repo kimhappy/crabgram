@@ -1,0 +1,28 @@
+error[E0080]: evaluation panicked: the name cannot be blank
+  --> tests/ui/info_blank_name.rs:3:20
+   |
+ 3 |   const INFO: Info = crabgram::info! {
+   |  ____________________^
+ 4 | |     uri: c"urn:example:blank",
+ 5 | |     name: "  ",
+ 6 | |     description: "",
+...  |
+ 9 | |     channels: 1,
+10 | | };
+   | |_^ evaluation of `INFO` failed inside this call
+   |
+note: inside `crabgram::__private::info::checked`
+  --> src/info/make.rs
+   |
+   |         Some(problem) => problem.fail(),
+   |                          ^^^^^^^^^^^^^^
+note: inside `InfoProblem::fail`
+  --> $RUST/core/src/panic.rs
+   |
+   |         $crate::panicking::panic_display(&$arg);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the failure occurred here
+   |
+  ::: src/info/problem.rs
+   |
+   |         panic!("{}", self.message());
+   |         ---------------------------- in this macro invocation

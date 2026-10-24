@@ -1,0 +1,17 @@
+error[E0277]: only `#[derive(Controls)]` implements `Controls`, not one for `Shape`
+  --> tests/ui/seal_choice_as_controls.rs:13:29
+   |
+13 | impl crabgram::Controls for Shape {
+   |                             ^^^^^ unsatisfied trait bound
+   |
+help: the trait `crabgram::__private::SealedControls` is not implemented for `Shape`
+  --> tests/ui/seal_choice_as_controls.rs:2:1
+   |
+ 2 | enum Shape {
+   | ^^^^^^^^^^
+   = note: derive `Controls` instead of implementing the trait
+note: required by a bound in `Controls`
+  --> src/control/controls.rs
+   |
+   | pub trait Controls: Default + crate::sealed::SealedControls + 'static {
+   |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `Controls`

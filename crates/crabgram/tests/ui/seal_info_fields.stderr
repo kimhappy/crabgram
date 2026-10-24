@@ -1,0 +1,5 @@
+error[E0616]: field `0` of struct `Info` is private
+ --> tests/ui/seal_info_fields.rs:4:10
+  |
+4 |     info.0.channels = 0;
+  |          ^ private field

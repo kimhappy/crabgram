@@ -1,0 +1,5 @@
+error: an integer control needs `min` and `max`
+ --> tests/ui/controls_integer_without_range.rs:3:5
+  |
+3 |     steps: u32,
+  |     ^^^^^^^^^^

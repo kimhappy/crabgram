@@ -1,0 +1,5 @@
+error: a bool control takes no `unit`
+ --> tests/ui/controls_unit_on_toggle.rs:3:22
+  |
+3 |     #[control(unit = Hertz)]
+  |                      ^^^^^

@@ -1,0 +1,5 @@
+error: `category` names a variant of `Category` alone, as `category: Utility`
+ --> tests/ui/info_category_by_path.rs:8:15
+  |
+8 |     category: crabgram::Category::Utility,
+  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^

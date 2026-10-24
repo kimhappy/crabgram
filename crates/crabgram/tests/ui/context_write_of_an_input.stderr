@@ -1,0 +1,32 @@
+warning: `feature(generic_const_exprs)` is not supported with the next-generation trait solver
+ --> tests/ui/context_write_of_an_input.rs:1:12
+  |
+1 | #![feature(generic_const_exprs)]
+  |            ^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `-Znext-solver=globally` is currently enabled by default for testing
+  = note: reverted the setting to `-Znext-solver=coherence` for this crate
+  = note: the currently stable trait solver will be used for this crate
+  = note: see issues #160895 <https://github.com/rust-lang/rust/issues/160895> for more information
+
+error[E0277]: `write` sets an output, and this field is an input
+  --> tests/ui/context_write_of_an_input.rs:42:23
+   |
+42 |         context.write(Params::LEVEL, 0.5);
+   |                 ----- ^^^^^^^^^^^^^ the trait `Writable` is not implemented for `Input`
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = note: ask the host to move an input with `Context::request_change`
+help: the trait `Writable` is implemented for `crabgram::access::Output`
+  --> src/field.rs
+   |
+   |     impl Writable for Output {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+note: required by a bound in `crabgram::Context::<'a, P>::write`
+  --> src/context.rs
+   |
+   | impl<'a, P: Plugin> Context<'a, P> {
+...
+   |     pub fn write<A: Writable, V: Value>(&mut self, field: Field<P::Controls, A, V>, value: V) {
+   |                     ^^^^^^^^ required by this bound in `Context::<'a, P>::write`

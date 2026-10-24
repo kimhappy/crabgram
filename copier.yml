@@ -1,0 +1,202 @@
+_subdirectory: template
+_templates_suffix: .jinja
+_exclude:
+  - "{% if not styling %}asset{% endif %}"
+  - .git
+
+project_name:
+  type: str
+  help: Plugin name
+  default: My Plugin
+  validator: >-
+    {%- if not project_name.strip() -%}
+    The name cannot be blank.
+    {%- elif '"' in project_name or '\\' in project_name -%}
+    The name cannot hold a quote or a backslash.
+    {%- endif -%}
+
+project_slug:
+  type: str
+  help: Crate name and `cargo` alias
+  default: "{{ project_name.lower().replace('-', ' ').replace(' ', '_') }}"
+  validator: >-
+    {%- if not (project_slug.isascii() and project_slug[:1].isalpha() and project_slug.isidentifier() and project_slug == project_slug.lower()) -%}
+    The crate name takes lowercase ASCII letters, digits and underscores, and starts with a letter.
+    {%- elif project_slug in ['crabgram', 'crabgram_build', 'crabgram_styling', 'crabgram_macros', 'crabgram_standalone', 'manifest', 'asset', 'styling', 'as', 'async', 'await', 'break', 'const', 'continue', 'crate', 'dyn', 'else', 'enum', 'extern', 'false', 'fn', 'for', 'if', 'impl', 'in', 'let', 'loop', 'match', 'mod', 'move', 'mut', 'pub', 'ref', 'return', 'self', 'static', 'struct', 'super', 'trait', 'true', 'type', 'unsafe', 'use', 'where', 'while', 'abstract', 'become', 'box', 'do', 'final', 'gen', 'macro', 'override', 'priv', 'try', 'typeof', 'unsized', 'virtual', 'yield', 'core', 'std', 'alloc', 'test', 'proc_macro', 'build', 'check', 'clippy', 'doc', 'fetch', 'fix', 'fmt', 'init', 'install', 'metadata', 'new', 'package', 'publish', 'run', 'rustc', 'rustdoc', 'search', 'bench', 'tree', 'uninstall', 'update', 'vendor', 'version', 'yank', 'add', 'remove', 'report', 'login', 'logout', 'owner', 'help', 'pkgid', 'config', 'zigbuild', 'miri', 'clean', 'info'] -%}
+    The crate name {{ project_slug }} is taken by crabgram, a file of the bundle, Rust or a cargo command.
+    {%- endif -%}
+
+struct_name:
+  type: str
+  help: Plugin struct name
+  default: "{{ project_name.title().replace('-', '').replace('_', '').replace(' ', '') }}"
+  validator: >-
+    {%- if not (struct_name.isascii() and struct_name[:1].isupper() and struct_name.isidentifier()) -%}
+    The struct name takes ASCII letters, digits and underscores, and starts with an uppercase letter.
+    {%- elif struct_name in ['Params', 'Plugin', 'Info', 'Context', 'Controls', 'Category', 'Choice', 'ControlState', 'Counts', 'Licensing', 'Block', 'Rig', 'CountingAllocator', 'Self', 'Option', 'Some', 'None', 'Result', 'Ok', 'Err', 'Vec', 'String', 'Box', 'Default'] -%}
+    The struct name {{ struct_name }} is taken by a name the plugin crate uses.
+    {%- endif -%}
+
+description:
+  type: str
+  help: One-line description
+  default: Turns the level up or down.
+  validator: "{% if '\"' in description or '\\\\' in description %}The description cannot hold a quote or a backslash.{% endif %}"
+
+abbreviation:
+  type: str
+  help: Abbreviation (1 to 3 characters)
+  default: "{{ project_slug[:2] | upper }}"
+  validator: >-
+    {%- if not (1 <= abbreviation | length <= 3) -%}
+    The abbreviation takes one to three characters.
+    {%- elif not abbreviation.strip() -%}
+    The abbreviation cannot be blank.
+    {%- elif '"' in abbreviation or '\\' in abbreviation -%}
+    The abbreviation cannot hold a quote or a backslash.
+    {%- endif -%}
+
+category:
+  type: str
+  help: Plugin category
+  default: Utility
+  choices:
+    - Utility
+    - Amplifier
+    - Analyser
+    - Chorus
+    - Compressor
+    - Delay
+    - Distortion
+    - Dynamics
+    - Equalizer
+    - Filter
+    - Flanger
+    - Gate
+    - Generator
+    - Limiter
+    - Mixer
+    - Modulator
+    - Phaser
+    - Pitch
+    - Reverb
+    - Simulator
+    - Spatial
+    - Waveshaper
+
+channels:
+  type: int
+  help: Audio channels
+  default: 1
+  choices:
+    - 1
+    - 2
+
+author_name:
+  type: str
+  default: Your Name
+  validator: >-
+    {%- if '"' in author_name or '\\' in author_name -%}
+    The author name cannot hold a quote or a backslash.
+    {%- elif ':' in author_name or '<' in author_name or '>' in author_name -%}
+    The author name cannot hold :, < or >.
+    {%- endif -%}
+
+author_email:
+  type: str
+  default: you@example.com
+  validator: >-
+    {%- if author_email.split() != [author_email] -%}
+    The e-mail cannot be blank or hold whitespace.
+    {%- elif '"' in author_email or '\\' in author_email -%}
+    The e-mail cannot hold a quote or a backslash.
+    {%- elif ':' in author_email -%}
+    The e-mail cannot hold :.
+    {%- elif '<' in author_email or '>' in author_email or '{' in author_email or '}' in author_email or '|' in author_email or '^' in author_email or '`' in author_email -%}
+    The e-mail cannot hold <, >, {, }, |, ^ or `.
+    {%- endif -%}
+
+license:
+  type: str
+  help: SPDX license expression
+  default: GPL-3.0-only
+  validator: >-
+    {%- if not license.strip() -%}
+    The license cannot be blank.
+    {%- elif '"' in license or '\\' in license -%}
+    The license cannot hold a quote or a backslash.
+    {%- endif -%}
+
+license_document:
+  type: str
+  help: IRI of the license text
+  when: >-
+    {%- set ns = namespace(exception=false, unlisted=false) -%}
+    {%- for token in license.replace('(', ' ').replace(')', ' ').replace('/', ' ').split() -%}
+    {%- if ns.exception -%}{%- set ns.exception = false -%}
+    {%- elif token == 'WITH' -%}{%- set ns.exception = true -%}
+    {%- elif token.startswith('LicenseRef-') or token.startswith('DocumentRef-') -%}{%- set ns.unlisted = true -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {{ ns.unlisted }}
+  validator: >-
+    {%- set iri = license_document -%}
+    {%- set scheme = iri.split(':')[0] -%}
+    {%- if '"' in iri or '\\' in iri -%}
+    The IRI of the license text cannot hold a quote or a backslash.
+    {%- elif iri.split() != [iri] -%}
+    The IRI of the license text cannot be blank or hold whitespace.
+    {%- elif '<' in iri or '>' in iri or '{' in iri or '}' in iri or '|' in iri or '^' in iri or '`' in iri -%}
+    The IRI of the license text cannot hold <, >, {, }, |, ^ or `.
+    {%- elif not (':' in iri and scheme.isascii() and scheme[:1].isalpha() and scheme.replace('+', '').replace('-', '').replace('.', '').isalnum()) -%}
+    The IRI of the license text needs a scheme, such as https: or urn:.
+    {%- endif -%}
+  default: ""
+
+licensing:
+  type: str
+  help: License check of a device build
+  default: "off"
+  choices:
+    - "off"
+    - free
+    - commercial
+
+styling:
+  type: bool
+  help: Custom styling of the settings screen
+  default: false
+
+uri:
+  type: str
+  help: Plugin URI
+  default: "https://github.com/you/{{ project_slug }}"
+  validator: >-
+    {%- set iri = uri -%}
+    {%- set scheme = iri.split(':')[0] -%}
+    {%- if '"' in iri or '\\' in iri -%}
+    The URI cannot hold a quote or a backslash.
+    {%- elif iri.split() != [iri] -%}
+    The URI cannot be blank or hold whitespace.
+    {%- elif '<' in iri or '>' in iri or '{' in iri or '}' in iri or '|' in iri or '^' in iri or '`' in iri -%}
+    The URI cannot hold <, >, {, }, |, ^ or `.
+    {%- elif not (':' in iri and scheme.isascii() and scheme[:1].isalpha() and scheme.replace('+', '').replace('-', '').replace('.', '').isalnum()) -%}
+    The URI needs a scheme, such as https: or urn:.
+    {%- endif -%}
+
+repository:
+  type: str
+  help: Repository URL
+  default: "{{ uri }}"
+  validator: >-
+    {%- set iri = repository -%}
+    {%- set scheme = iri.split(':')[0] -%}
+    {%- if '"' in iri or '\\' in iri -%}
+    The repository cannot hold a quote or a backslash.
+    {%- elif iri.split() != [iri] -%}
+    The repository cannot be blank or hold whitespace.
+    {%- elif '<' in iri or '>' in iri or '{' in iri or '}' in iri or '|' in iri or '^' in iri or '`' in iri -%}
+    The repository cannot hold <, >, {, }, |, ^ or `.
+    {%- elif not (':' in iri and scheme.isascii() and scheme[:1].isalpha() and scheme.replace('+', '').replace('-', '').replace('.', '').isalnum()) -%}
+    The repository needs a scheme, such as https: or urn:.
+    {%- endif -%}

@@ -1,0 +1,5 @@
+error: a plugin needs at least one control
+ --> tests/ui/controls_without_fields.rs:2:8
+  |
+2 | struct Params {}
+  |        ^^^^^^

@@ -1,0 +1,133 @@
+{
+  "nodes": {
+    "darkglass-lv2-extensions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789230859,
+        "narHash": "sha256-pFol9NTK1zzMCbeQY0hIrMoecs/n2CgIqPFpfoeHAJw=",
+        "owner": "Darkglass-Electronics",
+        "repo": "LV2-Extensions",
+        "rev": "f25a09ed6bc635fd4cbf75a34c9a735879015ae5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Darkglass-Electronics",
+        "repo": "LV2-Extensions",
+        "rev": "f25a09ed6bc635fd4cbf75a34c9a735879015ae5",
+        "type": "github"
+      }
+    },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1791115502,
+        "narHash": "sha256-aVTOHyf6BmkMvHThIerMWfUyNe1uCb99rBtWidWeHOE=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "6598f619e53297ea2328ddd40d431c7bc41f7bc1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
+    "kxstudio-lv2-extensions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772133262,
+        "narHash": "sha256-IqF8aQXDU7tGAt/fjZbO8RBxvlc0oOfb+EKTOWKZemc=",
+        "owner": "KXStudio",
+        "repo": "LV2-Extensions",
+        "rev": "08b09df09299a8be6912ec68eaaeff19359e00e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KXStudio",
+        "repo": "LV2-Extensions",
+        "rev": "08b09df09299a8be6912ec68eaaeff19359e00e0",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1791048980,
+        "narHash": "sha256-KgItSKML8Xvte0B7/uGnBDsYzSnnKHcOaiUbgWBXLXw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a7868a727837f3c09cee2ce0ca671c76b1589fed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "plugin-builder": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790966224,
+        "narHash": "sha256-Dvzks8JA0R3KLFIKHDPXq0QU+rKK3bmpQVDP8aJMP68=",
+        "owner": "Darkglass-Electronics",
+        "repo": "plugin-builder",
+        "rev": "06ef008ccb9276fc3dc110d1ab04d68d3156b3c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Darkglass-Electronics",
+        "repo": "plugin-builder",
+        "rev": "06ef008ccb9276fc3dc110d1ab04d68d3156b3c4",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "darkglass-lv2-extensions": "darkglass-lv2-extensions",
+        "fenix": "fenix",
+        "kxstudio-lv2-extensions": "kxstudio-lv2-extensions",
+        "nixpkgs": "nixpkgs",
+        "plugin-builder": "plugin-builder",
+        "rust-manifest": "rust-manifest"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790991460,
+        "narHash": "sha256-88lguqQwNBIQAd7hzxFMMg4LaPiJuvBTTbyCDDltGiQ=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "3332931d313fad08166571c05d7237d3a4d77ac2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "rust-manifest": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-AwGboqfxIt0Njo5dG0n2FcyIDA5HQhNqKqVnJS8v1e8=",
+        "type": "file",
+        "url": "https://static.rust-lang.org/dist/2026-10-04/channel-rust-nightly.toml"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://static.rust-lang.org/dist/2026-10-04/channel-rust-nightly.toml"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

@@ -1,0 +1,8 @@
+error[E0277]: `f32` is not a Choice enum
+ --> tests/ui/controls_type_alias.rs:5:11
+  |
+5 |     gain: Decibels,
+  |           ^^^^^^^^ the trait `crabgram::Choice` is not implemented for `f32`
+  |
+  = note: a control field is `f32`, `bool`, an integer up to 32 bits or an enum deriving `Choice`
+  = note: the derive knows types by name and takes any other name, a type alias included, for a Choice enum: write the type an alias names

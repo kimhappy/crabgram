@@ -1,0 +1,5 @@
+error: LV2 control ports are 32-bit floats: use f32, or an integer up to 32 bits
+ --> tests/ui/controls_f64_field.rs:3:12
+  |
+3 |     level: f64,
+  |            ^^^

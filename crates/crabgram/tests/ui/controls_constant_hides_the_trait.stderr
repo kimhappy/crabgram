@@ -1,0 +1,5 @@
+error: the field makes the constant `CONTROLS`, which would hide `Controls::CONTROLS`: rename the field
+ --> tests/ui/controls_constant_hides_the_trait.rs:3:5
+  |
+3 |     controls: f32,
+  |     ^^^^^^^^

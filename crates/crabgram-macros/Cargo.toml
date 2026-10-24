@@ -1,0 +1,22 @@
+[package]
+name = "crabgram-macros"
+description = "The macros of crabgram: the Controls and Choice derives and info!"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro-crate.workspace = true
+proc-macro2.workspace = true
+quote.workspace = true
+syn = { workspace = true, features = ["full"] }
+thiserror.workspace = true
+
+[lints]
+workspace = true

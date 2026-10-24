@@ -1,0 +1,13 @@
+error: `info!` needs `abbreviation`, `channels`: it takes uri, name, description, abbreviation, category, channels (required) and licensing, license_document (optional)
+ --> tests/ui/info_missing_fields.rs:3:20
+  |
+3 |   const INFO: Info = crabgram::info! {
+  |  ____________________^
+4 | |     uri: c"urn:example:tremolo",
+5 | |     name: "Tremolo",
+6 | |     description: "",
+7 | |     category: Modulator,
+8 | | };
+  | |_^
+  |
+  = note: this error originates in the macro `crabgram::info` (in Nightly builds, run with -Z macro-backtrace for more info)

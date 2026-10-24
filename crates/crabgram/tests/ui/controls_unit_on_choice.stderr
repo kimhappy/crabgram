@@ -1,0 +1,5 @@
+error: a Choice control takes no `unit`; the derive knows types by name, so if `Shape` is a type alias, write the type it names
+ --> tests/ui/controls_unit_on_choice.rs:9:22
+  |
+9 |     #[control(unit = Hertz)]
+  |                      ^^^^^
