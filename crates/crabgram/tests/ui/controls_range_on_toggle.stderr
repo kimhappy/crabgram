@@ -1,0 +1,5 @@
+error: a bool control takes no `min`
+ --> tests/ui/controls_range_on_toggle.rs:3:21
+  |
+3 |     #[control(min = 0.0, max = 1.0)]
+  |                     ^^^

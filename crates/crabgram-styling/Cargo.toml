@@ -1,0 +1,21 @@
+[package]
+name = "crabgram-styling"
+description = "Typed Darkglass custom styling for crabgram plugins, written out as Turtle"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[features]
+serde = ["dep:serde", "dep:serde_json", "crabgram/serde"]
+
+[dependencies]
+crabgram.workspace = true
+serde = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+thiserror.workspace = true
+
+[lints]
+workspace = true

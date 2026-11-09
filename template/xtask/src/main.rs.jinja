@@ -1,0 +1,56 @@
+//! `cargo {{ project_slug }} <bundle|check|deploy|help>`: assembles, checks and deploys the bundle{% if styling %}.
+{% else %}, without
+//! styling.
+{% endif %}
+{%- if styling %}
+use crabgram_build::{Assets, Project};
+use crabgram_styling::{BlockSettings, Icons, Parameter, Styling, Widget};
+use {{ project_slug }}::Params;
+
+struct Xtask;
+
+impl Project for Xtask {
+    type Plugin = {{ project_slug }}::{{ struct_name }};
+
+    const ASSETS: Option<Assets> = Some(crabgram_build::assets!("../asset"));
+
+    fn styling() -> Styling {
+        Styling::default()
+            .with_icons(Icons::new("asset/block-on.png", "asset/block-off.png"))
+            .with_block_settings(
+                BlockSettings::default()
+                    .with_background("asset/background.png")
+                    .with_parameter(Parameter::of(Params::GAIN).with_widget(
+                        Widget::new("asset/knob.png").with_background("asset/panel-gain.png"),
+                    ))
+                    .with_parameter(Parameter::of(Params::PEAK).with_widget(
+                        Widget::new("asset/meter.png").with_background("asset/panel-peak.png"),
+                    )),
+            )
+    }
+}
+{%- else %}
+use crabgram_build::Project;
+
+struct Xtask;
+
+impl Project for Xtask {
+    type Plugin = {{ project_slug }}::{{ struct_name }};
+}
+{%- endif %}
+
+fn main() -> std::process::ExitCode {
+    crabgram_build::run::<Xtask>()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_bundle_has_no_problems() {
+        let problems = crabgram_build::problems::<Xtask>();
+
+        assert!(problems.is_empty(), "{problems}");
+    }
+}

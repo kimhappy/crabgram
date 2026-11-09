@@ -1,0 +1,149 @@
+//! {{ description }}
+
+#![feature(generic_const_exprs)]
+
+use core::{array, f64::consts::TAU};
+
+use crabgram::prelude::*;
+
+/// Bottom of the output meter.
+pub const FLOOR_DB: f32 = -60.0;
+
+const SMOOTHING_HZ: f64 = 10.0;
+
+/// The linear gain of `gain_db` decibels.
+#[must_use]
+pub fn db_to_gain(gain_db: f32) -> f32 {
+    10.0_f32.powf(gain_db * 0.05)
+}
+
+/// The decibels of the linear `gain`, finite even for silence.
+#[must_use]
+pub fn gain_to_db(gain: f32) -> f32 {
+    20.0 * gain.max(f32::MIN_POSITIVE).log10()
+}
+
+/// One step from `gain` towards `target`; snaps once the step rounds away.
+fn glide(gain: f32, target: f32, coefficient: f32) -> f32 {
+    let next = gain + coefficient * (target - gain);
+
+    if next == gain { target } else { next }
+}
+
+/// The control ports.
+#[derive(Controls)]
+pub struct Params {
+    /// On the quick pot.
+    #[control(default = 0.0, min = -24.0, max = 12.0, unit = Decibel, quick_pot)]
+    pub gain: f32,
+    /// Shown as a meter.
+    #[control(output, default = FLOOR_DB, min = FLOOR_DB, max = 0.0, unit = Decibel)]
+    pub peak: f32,
+}
+
+/// {{ description }}
+pub struct {{ struct_name }} {
+    coefficient: f32,
+    gain: f32,
+}
+
+impl Plugin for {{ struct_name }} {
+    type Controls = Params;
+
+    const INFO: Info = info! {
+        uri: c"{{ uri }}",
+        name: "{{ project_name }}",
+        description: "{{ description }}",
+        abbreviation: "{{ abbreviation }}",
+        category: {{ category }},
+        channels: {{ channels }},
+{%- if license_document %}
+        license_document: "{{ license_document }}",
+{%- endif %}
+{%- if licensing != "off" %}
+        licensing: {{ licensing.title() }},
+{%- endif %}
+    };
+
+    fn new() -> Self {
+        Self {
+            coefficient: (1.0 - (-TAU * SMOOTHING_HZ / SAMPLE_RATE).exp()) as f32,
+            gain: 1.0,
+        }
+    }
+
+    fn run(&mut self, controls: &Params, context: &mut Context<'_, Self>) {
+        let target = if context.is_enabled() {
+            db_to_gain(controls.gain)
+        } else {
+            1.0
+        };
+
+        if context.is_reset() {
+            self.gain = target;
+        }
+
+        let gains: [f32; FRAMES] = array::from_fn(|_| {
+            self.gain = glide(self.gain, target, self.coefficient);
+            self.gain
+        });
+        let peak = context
+            .buffers()
+            .into_iter()
+            .flat_map(|channel| channel.iter_mut().zip(gains))
+            .fold(0.0_f32, |peak, (sample, gain)| {
+                *sample *= gain;
+                peak.max(sample.abs())
+            });
+
+        context.write(Params::PEAK, gain_to_db(peak));
+    }
+}
+
+export!({{ struct_name }});
+
+#[cfg(test)]
+mod tests {
+    use crabgram::testing::{Block, Rig};
+
+    use super::*;
+
+    #[global_allocator]
+    static ALLOCATOR: crabgram::testing::CountingAllocator = crabgram::testing::CountingAllocator;
+
+    #[test]
+    fn the_first_block_starts_at_the_set_gain() {
+        let block = Rig::<{{ struct_name }}>::new().process(Block {
+            audio: [[0.5; FRAMES]; {{ channels }}],
+            controls: Params {
+                gain: -6.0,
+                ..Params::default()
+            },
+            ..Block::default()
+        });
+
+        assert!(
+            block
+                .audio
+                .iter()
+                .flatten()
+                .all(|it| (it - 0.5 * db_to_gain(-6.0)).abs() < 1.0e-6)
+        );
+    }
+
+    #[test]
+    fn a_bypassed_block_passes_the_signal_through() {
+        let input = [array::from_fn(|frame| frame as f32 / FRAMES as f32); {{ channels }}];
+        let block = Rig::<{{ struct_name }}>::new().process(Block {
+            audio: input,
+            controls: Params {
+                gain: 12.0,
+                ..Params::default()
+            },
+            enabled: false,
+            ..Block::default()
+        });
+
+        assert_eq!(block.audio, input);
+    }
+}

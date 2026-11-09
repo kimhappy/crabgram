@@ -1,0 +1,26 @@
+[package]
+name = "crabgram-standalone"
+description = "The standalone app every native crabgram bundle comes with: the plugin and a block settings preview, on your audio devices"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+ab_glyph.workspace = true
+cpal.workspace = true
+libloading.workspace = true
+crabgram.workspace = true
+crabgram-styling = { workspace = true, features = ["serde"] }
+resvg.workspace = true
+ringbuf.workspace = true
+serde_json.workspace = true
+softbuffer.workspace = true
+thiserror = { workspace = true, features = ["std"] }
+tiny-skia.workspace = true
+winit.workspace = true
+
+[lints]
+workspace = true

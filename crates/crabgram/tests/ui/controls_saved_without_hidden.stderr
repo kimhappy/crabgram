@@ -1,0 +1,5 @@
+error: `saved` is for a `hidden` input
+ --> tests/ui/controls_saved_without_hidden.rs:3:15
+  |
+3 |     #[control(saved)]
+  |               ^^^^^

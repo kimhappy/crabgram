@@ -1,0 +1,24 @@
+warning: `feature(generic_const_exprs)` is not supported with the next-generation trait solver
+ --> tests/ui/context_change_of_a_bool_by_a_float.rs:1:12
+  |
+1 | #![feature(generic_const_exprs)]
+  |            ^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `-Znext-solver=globally` is currently enabled by default for testing
+  = note: reverted the setting to `-Znext-solver=coherence` for this crate
+  = note: the currently stable trait solver will be used for this crate
+  = note: see issues #160895 <https://github.com/rust-lang/rust/issues/160895> for more information
+
+error[E0308]: mismatched types
+  --> tests/ui/context_change_of_a_bool_by_a_float.rs:40:46
+   |
+40 |         context.request_change(Params::SYNC, 0.5);
+   |                 --------------               ^^^ expected `bool`, found floating-point number
+   |                 |
+   |                 arguments to this method are incorrect
+   |
+note: method defined here
+  --> src/context.rs
+   |
+   |     pub fn request_change<A: Requestable, V: Value>(
+   |            ^^^^^^^^^^^^^^

@@ -1,0 +1,24 @@
+# {{ project_name }}
+
+{{ description }}
+
+An LV2 plugin for the Darkglass Anagram, written with [crabgram](https://github.com/kimhappy/crabgram).
+
+## Commands
+
+```sh
+nix develop            # native shell
+nix develop .#anagram  # device shell
+
+cargo {{ project_slug }} bundle  # assemble the bundle; native: the standalone app in build/{{ project_slug }}/
+cargo {{ project_slug }} check   # check the bundle
+cargo {{ project_slug }} deploy  # device shell: install over SSH; --host <ssh destination> for another host
+cargo test                       # unit tests on the real LV2 entry points
+cargo miri test -p {{ project_slug }}
+```
+
+Or without entering a shell: `nix develop --command cargo {{ project_slug }} bundle`.
+
+Nix reads the project through git, so `flake.nix` and `flake.lock` must be tracked: run `git add -N flake.nix` before the first `nix develop` and `git add flake.lock` after it.
+
+Cargo and `flake.nix` both take crabgram from GitHub: Cargo the crates, pinned in `Cargo.lock`, and Nix the shells, pinned in `flake.lock`. To move to a newer crabgram, run `cargo update -p crabgram` and `nix flake update crabgram`.

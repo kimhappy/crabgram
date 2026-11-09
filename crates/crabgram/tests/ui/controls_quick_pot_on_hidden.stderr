@@ -1,0 +1,5 @@
+error: the quick pot cannot be hidden
+ --> tests/ui/controls_quick_pot_on_hidden.rs:3:23
+  |
+3 |     #[control(hidden, quick_pot)]
+  |                       ^^^^^^^^^

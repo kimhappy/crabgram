@@ -1,0 +1,20 @@
+error[E0277]: `Counts` comes with `Plugin`: implement `Plugin` for `Counted` instead
+ --> tests/ui/counts_by_hand.rs:3:27
+  |
+3 | impl crabgram::Counts for Counted {
+  |                           ^^^^^^^ unsatisfied trait bound
+  |
+help: the trait `Plugin` is not implemented for `Counted`
+ --> tests/ui/counts_by_hand.rs:1:1
+  |
+1 | struct Counted;
+  | ^^^^^^^^^^^^^^
+  = note: required for `Counted` to implement `crabgram::plugin::seal::Seal`
+note: required by a bound in `Counts`
+ --> src/plugin.rs
+  |
+  | pub trait Counts: seal::Seal {
+  |                   ^^^^^^^^^^ required by this bound in `Counts`
+  = note: `Counts` is a "sealed trait", because to implement it you also need to implement `crabgram::plugin::seal::Seal`, which is not accessible; this is usually done to force you to use one of the provided types that already implement it
+  = help: the following type implements the trait:
+            P

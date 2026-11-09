@@ -1,0 +1,17 @@
+[package]
+name = "{{ project_slug }}-xtask"
+description = "Assembles, checks and deploys the LV2 bundle of {{ project_name }}"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+{{ project_slug }}.workspace = true
+crabgram-build.workspace = true
+{% if styling %}crabgram-styling.workspace = true
+{% endif %}
+[lints]
+workspace = true

@@ -1,0 +1,16 @@
+warning: `feature(generic_const_exprs)` is not supported with the next-generation trait solver
+ --> tests/ui/buffer_of_another_count.rs:1:12
+  |
+1 | #![feature(generic_const_exprs)]
+  |            ^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `-Znext-solver=globally` is currently enabled by default for testing
+  = note: reverted the setting to `-Znext-solver=coherence` for this crate
+  = note: the currently stable trait solver will be used for this crate
+  = note: see issues #160895 <https://github.com/rust-lang/rust/issues/160895> for more information
+
+error[E0527]: pattern requires 2 elements but array has 1
+  --> tests/ui/buffer_of_another_count.rs:40:13
+   |
+40 |         let [left, right] = context.buffers();
+   |             ^^^^^^^^^^^^^ expected 1 element

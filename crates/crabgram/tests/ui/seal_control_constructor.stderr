@@ -1,0 +1,16 @@
+error[E0624]: associated function `unchecked` is private
+ --> tests/ui/seal_control_constructor.rs:2:32
+  |
+2 |       let _ = crabgram::Control::unchecked(
+  |                                  ^^^^^^^^^ private associated function
+  |
+ ::: src/control/definition.rs
+  |
+  | /     pub(super) const fn unchecked(
+  | |         symbol: &'static str,
+  | |         name: &'static str,
+  | |         direction: Direction,
+... |
+  | |         flags: Flags,
+  | |     ) -> Self {
+  | |_____________- private associated function defined here

@@ -1,0 +1,5 @@
+error: Choice derives only for types without generic parameters
+ --> tests/ui/choice_generic.rs:2:11
+  |
+2 | enum Shape<const N: usize> {
+  |           ^^^^^^^^^^^^^^^^

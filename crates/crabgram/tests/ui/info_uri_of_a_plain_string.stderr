@@ -1,0 +1,5 @@
+error: `uri` is a C string literal: write `c"..."`
+ --> tests/ui/info_uri_of_a_plain_string.rs:4:10
+  |
+4 |     uri: "urn:example:tremolo",
+  |          ^^^^^^^^^^^^^^^^^^^^^

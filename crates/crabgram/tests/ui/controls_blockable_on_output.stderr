@@ -1,0 +1,5 @@
+error: only an input can be blocked
+ --> tests/ui/controls_blockable_on_output.rs:3:23
+  |
+3 |     #[control(output, blockable)]
+  |                       ^^^^^^^^^

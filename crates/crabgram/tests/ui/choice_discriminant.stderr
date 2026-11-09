@@ -1,0 +1,5 @@
+error: a Choice takes its values from the variant order, not from discriminants
+ --> tests/ui/choice_discriminant.rs:3:12
+  |
+3 |     Sine = 1,
+  |            ^

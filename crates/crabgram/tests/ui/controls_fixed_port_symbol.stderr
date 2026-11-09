@@ -1,0 +1,24 @@
+error[E0080]: evaluation panicked: the symbol is that of a port every plugin has: reset, lv2_enabled, lv2_bpm, lv2_audio_in_<n> or lv2_audio_out_<n>
+ --> tests/ui/controls_fixed_port_symbol.rs:3:5
+  |
+3 |     reset: bool,
+  |     ^^^^^ evaluation of `<Params as crabgram::Controls>::CONTROLS` failed inside this call
+  |
+note: inside `crabgram::__private::control::control`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_display(&$arg);
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the failure occurred here
+  |
+ ::: src/control/make.rs
+  |
+  |         panic!("{}", problem.message());
+  |         ------------------------------- in this macro invocation
+
+note: erroneous constant encountered
+ --> tests/ui/controls_fixed_port_symbol.rs:1:10
+  |
+1 | #[derive(crabgram::Controls)]
+  |          ^^^^^^^^^^^^^^^^^^
+  |
+  = note: this note originates in the derive macro `crabgram::Controls` (in Nightly builds, run with -Z macro-backtrace for more info)

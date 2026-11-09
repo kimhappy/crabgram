@@ -1,0 +1,5 @@
+error: `#[control]` goes on a field
+ --> tests/ui/controls_control_on_the_struct.rs:2:1
+  |
+2 | #[control(output)]
+  | ^^^^^^^^^^^^^^^^^^

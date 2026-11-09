@@ -1,0 +1,7 @@
+[alias]
+{{ project_slug }} = "run --quiet --package {{ project_slug }}-xtask --"
+
+# `generic_const_exprs`, which sizes `Context::buffers`, runs on the current trait solver only: keep the next one to coherence.
+[build]
+rustflags = ["-Znext-solver=coherence"]
+rustdocflags = ["-Znext-solver=coherence"]

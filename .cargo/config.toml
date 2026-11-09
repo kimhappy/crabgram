@@ -1,0 +1,10 @@
+[build]
+rustflags = ["-Znext-solver=coherence"]
+rustdocflags = ["-Znext-solver=coherence"]
+
+# Stand-ins for building the standalone app in this workspace; the bundle command of crabgram-build
+# sets them for the plugin.
+[env]
+CRABGRAM_PLUGIN = "plugin"
+CRABGRAM_PACKAGE = "crabgram-standalone"
+CRABGRAM_VERSION = "0.0.0"

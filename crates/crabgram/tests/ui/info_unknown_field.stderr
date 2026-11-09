@@ -1,0 +1,5 @@
+error: `info!` has no field `abreviation`: it takes uri, name, description, abbreviation, category, channels (required) and licensing, license_document (optional)
+ --> tests/ui/info_unknown_field.rs:7:5
+  |
+7 |     abreviation: "TRM",
+  |     ^^^^^^^^^^^

@@ -1,0 +1,24 @@
+error[E0080]: evaluation panicked: a symbol is ASCII letters, digits and underscores, and does not start with a digit
+ --> tests/ui/controls_non_ascii_symbol.rs:3:5
+  |
+3 |     größe: f32,
+  |     ^^^^^ evaluation of `<Params as crabgram::Controls>::CONTROLS` failed inside this call
+  |
+note: inside `crabgram::__private::control::control`
+ --> $RUST/core/src/panic.rs
+  |
+  |         $crate::panicking::panic_display(&$arg);
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the failure occurred here
+  |
+ ::: src/control/make.rs
+  |
+  |         panic!("{}", problem.message());
+  |         ------------------------------- in this macro invocation
+
+note: erroneous constant encountered
+ --> tests/ui/controls_non_ascii_symbol.rs:1:10
+  |
+1 | #[derive(crabgram::Controls)]
+  |          ^^^^^^^^^^^^^^^^^^
+  |
+  = note: this note originates in the derive macro `crabgram::Controls` (in Nightly builds, run with -Z macro-backtrace for more info)

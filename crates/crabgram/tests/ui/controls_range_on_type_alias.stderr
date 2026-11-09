@@ -1,0 +1,5 @@
+error: a Choice control takes no `min`; the derive knows types by name, so if `Decibels` is a type alias, write the type it names
+ --> tests/ui/controls_range_on_type_alias.rs:5:21
+  |
+5 |     #[control(min = -24.0, max = 12.0)]
+  |                     ^^^^^

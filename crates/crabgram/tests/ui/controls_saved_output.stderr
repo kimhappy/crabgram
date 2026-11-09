@@ -1,0 +1,5 @@
+error: only an input can be saved to presets
+ --> tests/ui/controls_saved_output.rs:3:23
+  |
+3 |     #[control(output, saved)]
+  |                       ^^^^^

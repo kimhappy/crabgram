@@ -1,0 +1,5 @@
+error: Controls derives only for structs
+ --> tests/ui/controls_of_an_enum.rs:2:6
+  |
+2 | enum Params {
+  |      ^^^^^^

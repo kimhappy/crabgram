@@ -1,0 +1,15 @@
+error[E0308]: mismatched types
+ --> tests/ui/controls_float_range_on_integer.rs:3:21
+  |
+3 |     #[control(min = 0.0, max = 16.0)]
+  |                     ^^^ expected `u32`, found floating-point number
+4 |     steps: u32,
+  |            --- expected due to this
+
+error[E0308]: mismatched types
+ --> tests/ui/controls_float_range_on_integer.rs:3:32
+  |
+3 |     #[control(min = 0.0, max = 16.0)]
+  |                                ^^^^ expected `u32`, found floating-point number
+4 |     steps: u32,
+  |            --- expected due to this

@@ -1,0 +1,30 @@
+[package]
+name = "crabgram"
+description = "Write LV2 plugins for the Darkglass Anagram in Rust"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[features]
+licensing = ["dep:bindgen"]
+testing = []
+serde = ["dep:serde"]
+
+[dependencies]
+crabgram-macros.workspace = true
+serde = { workspace = true, optional = true }
+thiserror.workspace = true
+
+[build-dependencies]
+bindgen = { workspace = true, optional = true }
+
+[dev-dependencies]
+crabgram = { path = ".", features = ["testing"] }
+serde_json.workspace = true
+trybuild.workspace = true
+
+[lints]
+workspace = true

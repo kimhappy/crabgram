@@ -1,0 +1,19 @@
+error[E0119]: conflicting implementations of trait `Clone` for type `Shape`
+ --> tests/ui/choice_with_copy.rs:1:23
+  |
+1 | #[derive(Clone, Copy, crabgram::Choice)]
+  |          -----        ^^^^^^^^^^^^^^^^ conflicting implementation for `Shape`
+  |          |
+  |          first implementation here
+  |
+  = note: this error originates in the derive macro `crabgram::Choice` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0119]: conflicting implementations of trait `Copy` for type `Shape`
+ --> tests/ui/choice_with_copy.rs:1:23
+  |
+1 | #[derive(Clone, Copy, crabgram::Choice)]
+  |                 ----  ^^^^^^^^^^^^^^^^ conflicting implementation for `Shape`
+  |                 |
+  |                 first implementation here
+  |
+  = note: this error originates in the derive macro `crabgram::Choice` (in Nightly builds, run with -Z macro-backtrace for more info)
